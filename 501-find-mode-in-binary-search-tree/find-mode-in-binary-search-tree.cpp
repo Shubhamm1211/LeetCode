@@ -32,7 +32,7 @@ public:
         }
         vector<int>ans;
         for(auto x:mp){
-            if(x.second>=maxi){
+            if(x.second==maxi){
                 ans.push_back(x.first);
             }
         }
