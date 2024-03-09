@@ -9,11 +9,11 @@ public:
         }
         int ans=0;
         for(int i=0;i<col;i++){
-            int temp=INT_MIN;
+            priority_queue<int>pq;
             for(int j=0;j<row;j++){
-                temp=max(temp,grid[j][i]);
+                pq.push(grid[j][i]);
             }
-            ans=ans+temp;
+            ans=ans+pq.top();
         }
         return ans;
     }
