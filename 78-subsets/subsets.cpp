@@ -1,12 +1,12 @@
 class Solution {
 public:
     void solve(vector<int>nums,int i,int n,vector<int>&ds,vector<vector<int>>&ans){
-        ans.push_back(ds);
         for(int j=i;j<n;j++){
             ds.push_back(nums[j]);
             solve(nums,j+1,n,ds,ans);
             ds.pop_back();
         }
+        ans.push_back(ds);
     }
     vector<vector<int>> subsets(vector<int>& nums) {
         vector<vector<int>>ans;
