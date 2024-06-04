@@ -6,6 +6,28 @@ public:
     //     }
     //     return false;
     // }
+
+
+    // Memoization below
+    int helper(const vector<int>& days, const vector<int>& costs, const unordered_set<int>& st, int day, vector<int>& memo, int maxd) {
+        if (day > maxd) {
+            return 0;
+        }
+        if (memo[day] != -1) {
+            return memo[day];
+        }
+
+        if (st.find(day) == st.end()) {
+            memo[day] = helper(days, costs, st, day + 1, memo, maxd);
+        } else {
+            int cost1 = costs[0] + helper(days, costs, st, day + 1, memo, maxd);
+            int cost7 = costs[1] + helper(days, costs, st, day + 7, memo, maxd);
+            int cost30 = costs[2] + helper(days, costs, st, day + 30, memo, maxd);
+            memo[day] = min({cost1, cost7, cost30});
+        }
+
+        return memo[day];
+    }
     int mincostTickets(vector<int>& days, vector<int>& costs) {
         int maxd=days[days.size()-1];
         int n=days.size();
