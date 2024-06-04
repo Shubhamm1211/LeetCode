@@ -19,11 +19,13 @@
 | ------- |
 | [0198-house-robber](https://github.com/Shubhamm1211/LeetCode/tree/master/0198-house-robber) |
 | [0213-house-robber-ii](https://github.com/Shubhamm1211/LeetCode/tree/master/0213-house-robber-ii) |
+| [1025-minimum-cost-for-tickets](https://github.com/Shubhamm1211/LeetCode/tree/master/1025-minimum-cost-for-tickets) |
 # Dynamic Programming
 |  |
 | ------- |
 | [0198-house-robber](https://github.com/Shubhamm1211/LeetCode/tree/master/0198-house-robber) |
 | [0213-house-robber-ii](https://github.com/Shubhamm1211/LeetCode/tree/master/0213-house-robber-ii) |
+| [1025-minimum-cost-for-tickets](https://github.com/Shubhamm1211/LeetCode/tree/master/1025-minimum-cost-for-tickets) |
 # Hash Table
 |  |
 | ------- |
