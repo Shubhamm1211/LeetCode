@@ -1,5 +1,7 @@
 class Solution {
 public:
+//p->i
+//s->j
 	bool f(int i,int j,string& p,string& s,vector<vector<int>>& dp){
 		if(i<0 && j<0) return true;
 		if(i<0 && j>=0) return false;
@@ -12,7 +14,7 @@ public:
 		if(dp[i][j]!=-1) return dp[i][j];
 
 		if(p[i]==s[j] || p[i]=='?') return dp[i][j]=f(i-1,j-1,p,s,dp);
-		if(p[i]=='*') return dp[i][j]=f(i-1,j,p,s,dp) || f(i,j-1,p,s,dp);
+		if(p[i]=='*') return dp[i][j]=f(i-1,j,p,s,dp) + f(i,j-1,p,s,dp);
 		return dp[i][j]=false;
 	}
 
