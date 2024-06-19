@@ -32,3 +32,54 @@ public:
         return low;
     }
 };
+// class Solution {
+// public:
+//     int canMakeBouqe(vector<int>&bloomDay,int mid,int k){
+//         int bouqeCount=0;
+//         int consequtiveFlowers=0;
+
+//         for(int i=0; i<bloomDay.size();i++)
+//         {
+//             if(bloomDay[i]<=mid)
+//             {
+//                 consequtiveFlowers++;
+//             }
+//             else{
+//                 consequtiveFlowers=0;
+//             }
+//             if(consequtiveFlowers==k){
+//                 bouqeCount++;
+//                 consequtiveFlowers=0;
+//             }
+//         }
+//         return bouqeCount;
+//     }
+// public:
+//     int minDays(vector<int>& bloomDay, int m, int k) {
+//       int n = bloomDay.size();
+
+//       int startDay=0;
+//       int endDay=*max_element(bloomDay.begin(),bloomDay.end()); // max_day
+//       int minDays=-1;
+
+//       // Binary Search implementation below
+//       // O(n * log(max_day))
+//       while(startDay<=endDay) // O(log(max_day))
+//       {
+//             int mid = startDay + (endDay-startDay)/2;
+
+//             if(canMakeBouqe(bloomDay,mid,k)>=m) // O(n) time complexicity
+//             {
+//                 minDays=mid;
+//                 endDay=mid-1;
+//             }
+//             else{
+//                 startDay= mid+1;
+//             }
+//       }  
+//       return minDays;
+//     }
+// };
+
+// //tc->O(n*log(max_day))
+// //sc->O(1)
