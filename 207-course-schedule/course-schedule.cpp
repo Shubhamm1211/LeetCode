@@ -1,33 +1,31 @@
 class Solution {
 public:
-    bool canFinish(int v, vector<vector<int>>& pre) {
-        vector<int> adj[v];     
-        vector<int>indeg(v,0);                     
-        for(int i = 0; i < pre.size(); i++){
-            adj[pre[i][1]].push_back(pre[i][0]);
+    bool canFinish(int n, vector<vector<int>>& v) {
+        vector<int>adj[n];
+        for(int i=0;i<v.size();i++){
+            adj[v[i][1]].push_back(v[i][0]);
         }
-        vector<int>topo;
-        vector<int>vis(v,0);
-        for(int i=0;i<v;i++){
+        vector<int>indeg(n,0);
+        for(int i=0;i<n;i++){
             for(auto it:adj[i]){
                 indeg[it]++;
             }
         }
         queue<int>q;
-        for(int i=0;i<v;i++){
+        for(int i=0;i<indeg.size();i++){
             if(indeg[i]==0)q.push(i);
         }
+        vector<int>topo;
         while(!q.empty()){
             int node=q.front();
-            q.pop();
             topo.push_back(node);
+            q.pop();
             for(auto it:adj[node]){
                 indeg[it]--;
                 if(indeg[it]==0)q.push(it);
             }
         }
-        if(topo.size()==v)return true;
+        if(topo.size()==n)return true;
         else return false;
-
     }
 };
