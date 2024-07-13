@@ -1,3 +1,54 @@
+// class Solution {
+// public:
+//     vector<int> survivedRobotsHealths(vector<int>& pos, vector<int>& hel, string dir) {
+//         vector<pair<pair<int,int>,pair<char,int>>>v;//{{pos,hel},{dir,i}}
+//         int n=hel.size();
+//         for(int i=0;i<n;i++){
+//             v.push_back({{pos[i],hel[i]},{dir[i],i}});
+//         }
+//         sort(v.begin(),v.end());
+//         stack<pair<int,pair<int,char>>>st;//{i,{hel,dir}}
+//         for(int i=0;i<n;i++){
+//             if(!st.empty() and st.top().second.second=='R' and v[i].second.first=='L'){
+//                 int h1=v[i].first.second;
+//                 char p1=v[i].second.first;
+//                 int i1=v[i].second.second;
+//                 int h2=st.top().second.first;
+//                 char p2=st.top().second.second;
+//                 int i2=st.top().first;
+//                 if(!st.empty() and h1>h2){
+//                     st.pop();
+//                     h1--;
+//                     st.push({i1,{h1,p1}});
+//                 }
+//                 else if(!st.empty() and h1<h2){
+//                     st.pop();
+//                     h2--;
+//                     st.push({i2,{h2,p2}});
+//                 }
+//                 else if(!st.empty()){
+//                     st.pop();
+//                 }
+//             }
+//             else st.push({v[i].second.second,{v[i].first.second,v[i].second.first}});
+//         }
+//         if(st.empty())return {};
+//         else{
+//             vector<pair<int,int>>ans;
+//             while(!st.empty()){
+//                 ans.push_back({st.top().first,st.top().second.first});
+//                 st.pop();
+//             }
+//             sort(ans.begin(),ans.end());
+//             vector<int>res;
+//             for(int i=0;i<ans.size();i++){
+//                 res.push_back(ans[i].second);
+//             }
+//             return res;
+//         }
+//     }
+// };
+// Ordering is wrong, thats why hard
 class Solution {
 public:
     using int2=pair<int, int>;
