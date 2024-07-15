@@ -6,7 +6,7 @@ public:
             else return 1e9;
         }
         if(ind<0)return 1e9;
-        if(dp[ind][amt]!=-1)return dp[ind][amt];
+        if(dp[ind][amt]!=INT_MIN)return dp[ind][amt];
         int notpick=solve(ind-1,coins,amt,dp);
         int pick=1e9;
         if(coins[ind]<=amt){
@@ -16,7 +16,7 @@ public:
     }
     int coinChange(vector<int>& coins, int amt) {
         int n=coins.size();
-        vector<vector<int>>dp(n+1,vector<int>(amt+1,-1));
+        vector<vector<int>>dp(n+1,vector<int>(amt+1,INT_MIN));
         int ans=solve(n-1,coins,amt,dp);
         if(ans==1e9)return -1;
         else return ans;
