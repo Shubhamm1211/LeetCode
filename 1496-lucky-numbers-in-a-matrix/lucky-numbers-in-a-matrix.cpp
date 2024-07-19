@@ -7,7 +7,6 @@ public:
         unordered_map<int,int>mp;
         for(int i=0;i<n;i++){
             int maxi=*min_element(matrix[i].begin(),matrix[i].end());
-            // row.push_back(maxi);
             mp[maxi]++;
         }
         vector<int>ans;
@@ -18,8 +17,6 @@ public:
                     maxi=matrix[j][i];
                 }
             }
-            // col.push_back(maxi);
-            // if(mp.find(maxi)!=mp.end())ans.push_back(maxi);
             mp[maxi]++;
         }
         for(auto m:mp){
