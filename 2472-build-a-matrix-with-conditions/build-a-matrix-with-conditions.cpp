@@ -64,10 +64,10 @@ public:
         for (auto it : adj[node]) {
             if (!vis[it]) {
                 if (dfs(it, adj, vis, recStack, st)) {
-                    return true; // Cycle detected
+                    return true; 
                 }
             } else if (recStack[it]) {
-                return true; // Cycle detected
+                return true; 
             }
         }
         recStack[node] = 0;
@@ -82,7 +82,7 @@ public:
         for (int i = 1; i <= k; i++) {
             if (!vis[i]) {
                 if (dfs(i, adj, vis, recStack, st)) {
-                    return false; // Cycle detected
+                    return false; 
                 }
             }
         }
@@ -104,7 +104,7 @@ public:
         }
         vector<int> trow, tcol;
         if (!topo(adj1, trow, k) || !topo(adj2, tcol, k)) {
-            return {}; // Return empty matrix if a cycle is detected
+            return {}; 
         }
         vector<vector<int>> result(k, vector<int>(k, 0));
         unordered_map<int, int> rowMap, colMap;
