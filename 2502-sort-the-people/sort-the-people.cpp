@@ -1,17 +1,15 @@
-bool comp(pair<string,int>&a,pair<string,int>&b){
-    return b.second<a.second;
-}
 class Solution {
 public:
     vector<string> sortPeople(vector<string>& names, vector<int>& h) {
-        vector<pair<string,int>>p;
-        for(int i=0;i<names.size();i++){
-            p.push_back({names[i],h[i]});
+        vector<pair<int,string>>v;
+        int n=names.size();
+        for(int i=0;i<n;i++){
+            v.push_back({h[i],names[i]});
         }
-        sort(p.begin(),p.end(),comp);
+        sort(v.begin(),v.end(),greater<pair<int,string>>());
         vector<string>ans;
-        for(auto it:p){
-            ans.push_back(it.first);
+        for(int i=0;i<n;i++){
+            ans.push_back(v[i].second);
         }
         return ans;
     }
