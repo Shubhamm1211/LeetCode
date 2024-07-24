@@ -8,7 +8,7 @@ public:
         if (num==0)return mapping[0];
         int mapped=0;
         int multiplier=1;
-        while (num > 0) {
+        while (num>0) {
             int dig=num%10;
             mapped=mapping[dig]*multiplier+mapped;
             num=num/10;
