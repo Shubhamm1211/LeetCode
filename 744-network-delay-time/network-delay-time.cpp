@@ -1,29 +1,30 @@
 class Solution {
 public:
     int networkDelayTime(vector<vector<int>>& times, int n, int k) {
+        priority_queue< pair<int,int>, vector<pair<int,int>>, 
+        greater<pair<int,int>> >pq; //{dist,node}
         vector<pair<int,int>>adj[n+1];
+        vector<int>dist(n+1,1e9);
+        dist[k]=0;
         for(auto it:times){
             adj[it[0]].push_back({it[1],it[2]});
         }
-        priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> q;
-        q.push({0,k});
-        vector<int>dis(n+1,1e9);
-        dis[k]=0;
-        while(!q.empty()){
-            int wt=q.top().first;
-            int node=q.top().second;
-            q.pop();
+        pq.push({0,k});
+        while(!pq.empty()){
+            int dis=pq.top().first;
+            int node=pq.top().second;
+            pq.pop();
             for(auto it:adj[node]){
-                int adjn=it.first;
-                int w2=it.second;
-                if(wt+w2<dis[adjn]){
-                    dis[adjn]=wt+w2;
-                    q.push({wt+w2,adjn});
+                int wt=it.second;
+                int adjnode=it.first;
+                if(dis+wt<dist[adjnode]){
+                    dist[adjnode]=dis+wt;
+                    pq.push({dist[adjnode],adjnode});
                 }
             }
         }
-        int maxi=*max_element(dis.begin()+1,dis.end());
-        if(maxi==1e9)return -1;
-        return maxi;
+        int maxi=*max_element(dist.begin()+1,dist.end());
+        if(maxi!=1e9)return maxi;
+        else return -1;
     }
 };
