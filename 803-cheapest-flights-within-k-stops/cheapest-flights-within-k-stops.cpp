@@ -18,7 +18,7 @@ public:
             for(auto x:adj[node]){
                 int adjnode=x.first;
                 int wt=x.second;
-                if(wt+dist<dis[adjnode] and stops <=k){
+                if(wt+dist<dis[adjnode] ){
                     dis[adjnode]=wt+dist;
                     q.push({stops+1,{adjnode,dis[adjnode]}});
                 }
