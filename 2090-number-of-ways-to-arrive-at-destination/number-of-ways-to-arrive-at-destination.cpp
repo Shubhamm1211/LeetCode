@@ -34,10 +34,10 @@
 //         else return ways[n-1]%1000000007;
 //     }
 // };
-#include <vector>
-#include <queue>
-#include <climits>
-using namespace std;
+
+
+// CHANGE TO INT TO LONG LONG
+
 
 class Solution {
 public:
