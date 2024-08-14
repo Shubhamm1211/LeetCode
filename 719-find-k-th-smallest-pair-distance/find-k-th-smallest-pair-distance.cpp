@@ -1,6 +1,3 @@
-#include <vector>
-#include <algorithm>
-
 class Solution {
 public:
     int smallestDistancePair(std::vector<int>& nums, int k) {
