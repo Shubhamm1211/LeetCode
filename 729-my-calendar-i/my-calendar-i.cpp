@@ -1,16 +1,21 @@
 class MyCalendar {
 public:
-    vector<pair<int, int>>temp;
+    map<int, int> mp;
     MyCalendar() {
 
     }
     bool book(int start, int end) {
-        for(auto x:temp){
-            if(x.first < end and x.second > start){
+        int sum = 0;
+        mp[start]++ ;
+        mp[end]-- ;
+        for(auto it : mp){
+            sum += it.second;
+            if(sum > 1){
+                mp[start]--;
+                mp[end]++;
                 return false;
             }
         }
-        temp.push_back({start,end});
         return true;
     }
 };
