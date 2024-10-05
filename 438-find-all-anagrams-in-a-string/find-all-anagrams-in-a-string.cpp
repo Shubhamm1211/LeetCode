@@ -3,24 +3,33 @@ public:
     vector<int> findAnagrams(string s, string p) {
         int n1 = s.size();
         int n2 = p.size();
-        int l = 0, r = 0;
-        map<char, int> mp1, mp2;
-        for (auto c : p) {
-            mp2[c]++;
-        }
+        int i = 0, j = 0;
+        map<char,int> mp1 , mp2;
         vector<int> ans;
-        while (r < n1) {
-            mp1[s[r]]++;
-            if (r - l + 1 == n2) {
-                if (mp1 == mp2) {
-                    ans.push_back(l);
+        for(auto x : p){
+            mp1[x]++;
+        }
+        while(j < n1){
+            // cout << "i = " << i << " " << "j = " << j << endl;
+            // cout << "Map is: " << endl;
+            // for(auto x : mp2){
+            //     cout << x.first << " " << x.second << endl; 
+            // }
+            // cout << endl;
+            mp2[s[j]]++;
+            if(j - i + 1 == n2){
+                if(mp1 == mp2){
+                    ans.push_back(i);
+                    // cout << "pushing in answer" << endl;
                 }
-                mp1[s[l]]--;
-                if (mp1[s[l]] == 0)
-                    mp1.erase(s[l]);
-                l++;
+                mp2[s[i]]--;
+                if(mp2[s[i]] == 0) mp2.erase(s[i]);
+                i++;
+                j++;
+                
             }
-            r++;
+            else j++;
+            
         }
         return ans;
     }
