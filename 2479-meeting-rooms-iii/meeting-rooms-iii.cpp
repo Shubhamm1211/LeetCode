@@ -1,48 +1,44 @@
-class Solution
-{
+#define ll long long
+class Solution {
 public:
-    int mostBooked(int n, vector<vector<int>> &meetings)
-    {
-        vector<int> ans(n, 0);
-        priority_queue<int, vector<int>, greater<int>> available;
-        priority_queue<pair<long long, int>, vector<pair<long long, int>>, greater<pair<long long, int>>> busy;
-        
-
-        for (int i = 0; i < n; i++)
-        {
-            available.push(i);
+    int mostBooked(int n, vector<vector<int>>& v) {
+        sort(begin(v),end(v));
+        priority_queue<ll,vector<ll>,greater<ll>>pq1;
+        for(ll i = 0; i < n; i++){
+            pq1.push(i);
         }
-                sort(meetings.begin(), meetings.end());
-
-        for (auto &&meeting : meetings)
-        {
-            int start = meeting[0], end = meeting[1];
-
-
-            while (busy.size() > 0 && busy.top().first <= start)
-            {
-                available.push(busy.top().second);
-                busy.pop();
+        vector<ll> cnt(n,0);
+        priority_queue< pair<ll,ll>, vector<pair<ll,ll>>, greater<pair<ll,ll>> > pq2; //{end,roomNum}
+        for(ll i = 0; i < v.size(); i++){
+            ll start = v[i][0];
+            ll end = v[i][1];
+            while(!pq2.empty() and start >= pq2.top().first){
+                pq1.push(pq2.top().second);
+                pq2.pop();
             }
-
-
-            if (available.size() > 0)
-            {
-                int top = available.top();
-                ans[top]++;
-                available.pop(); 
-                busy.push({end, top});
+            if(!pq1.empty()){
+                ll num = pq1.top();
+                pq1.pop();
+                pq2.push({end,num});
+                cnt[num]++;
             }
-            else
-            {
-                auto top = busy.top();
-                int end1 = top.first, index = top.second;
-
-                ans[index]++;
-                busy.pop();
-                busy.push({top.first + end - start, index});
+            else{
+                ll num = pq2.top().second;
+                ll newstart = pq2.top().first;
+                pq2.pop();
+                ll newend = newstart + (end - start);
+                pq2.push({newend,num});
+                cnt[num]++;
             }
         }
-        return max_element(ans.begin(), ans.end()) - ans.begin();
+        ll maxi = INT_MIN;
+        ll ans = -1;
+        for(ll i = 0; i < cnt.size(); i++){
+            if(cnt[i] > maxi){
+                maxi = cnt[i];
+                ans = i;
+            }
+        }
+        return ans;
     }
 };
