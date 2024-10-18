@@ -5,6 +5,7 @@ public:
         if(row == n - 1){
             return mat[row][col];
         }
+        if(row > n or col > n) return 1e5;
         if(dp[row][col] != -1) return dp[row][col];
         int right =  solve(row + 1, col, mat,dp);
         int digdown =  solve(row + 1, col + 1, mat,dp);
