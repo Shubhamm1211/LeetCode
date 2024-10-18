@@ -1,16 +1,20 @@
 class Solution {
 public:
-    int solve(int i,int j,vector<vector<int>>&v,vector<vector<int>>&dp){
-        int n=v.size();
-        if(i==n-1)return v[n-1][j];
-        if(dp[i][j]!=-1)return dp[i][j];
-        int down=v[i][j]+solve(i+1,j,v,dp);
-        int dig=v[i][j]+solve(i+1,j+1,v,dp);
-        return dp[i][j]=min(down,dig);
+    int solve(int row, int col, vector<vector<int>> &mat, vector <vector<int>> &dp){
+        int n = mat.size();
+        if(row == n - 1){
+            return mat[row][col];
+        }
+        if(dp[row][col] != -1) return dp[row][col];
+        int right =  solve(row + 1, col, mat,dp);
+        int digdown =  solve(row + 1, col + 1, mat,dp);
+
+        return dp[row][col] = mat[row][col] + min(right,digdown);
     }
-    int minimumTotal(vector<vector<int>>& v) {
-        int n=v.size();
-        vector<vector<int>>dp(n,vector<int>(n,-1));
-        return solve(0,0,v,dp);
+    int minimumTotal(vector<vector<int>>& mat) {
+        int n = mat.size();
+        int m = mat[0].size();
+        vector <vector<int>> dp(n + 1, vector<int>(n + 1,-1));
+        return solve(0, 0, mat,dp);
     }
 };
