@@ -3,7 +3,7 @@ public:
     void solve(vector<vector<int>> &ans, vector<int> &v, int t, vector<int>&ds, int ind){
         if(t == 0){
             ans.push_back(ds);
-            return;
+            // return;
         }
         if(t < 0) return ;
         for(int j = ind; j < v.size(); j++){
