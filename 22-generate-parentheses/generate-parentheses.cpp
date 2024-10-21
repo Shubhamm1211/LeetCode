@@ -1,26 +1,23 @@
 class Solution {
 public:
-    void solve(vector<string>& ans, int open, int close, string output){
-        if(open == 0 && close == 0){
-            ans.push_back(output);
+    void solve(vector <string> &ans, string temp, int open, int close){
+        if(open == 0 and close == 0){
+            ans.push_back(temp);
             return;
         }
-
         if(open > 0){
-            solve(ans, open-1, close, output + '(');
+            solve(ans,temp + '(', open - 1, close);
         }
-
         if(close > open){
-            solve(ans, open, close-1, output + ')');
+            solve(ans, temp + ')', open, close - 1);
         }
     }
-
     vector<string> generateParenthesis(int n) {
-        vector<string> ans;
-        int open = n;
+        vector <string> ans;
+        string temp = "";
+        int open = n; 
         int close = n;
-        string output = "";
-        solve(ans, open, close, output);
+        solve(ans,temp,open,close);
         return ans;
     }
 };
