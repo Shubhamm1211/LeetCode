@@ -1,24 +1,25 @@
 class Solution {
 public:
-    bool solve(string &s,string& p,int i,int j,vector<vector<int>>&dp){
-        if(i<0 and j<0)return true;
-        if(j<0 and i>=0)return false;
-        if(i<0 and j>=0){
-            for(int k=j;j>=0;j--){
-                if(p[j]!='*')return false;
+    bool solve(int ind1, int ind2, string &s1, string &s2, vector <vector <int>> &dp){
+        if(ind1 < 0 and ind2 < 0) return true;
+        if(ind1 < 0 and ind2 >= 0){
+            for(int i = ind2; i >= 0; i--){
+                if(s2[i] != '*') return false;
             }
             return true;
         }
-        if(dp[i][j]!=-1)return dp[i][j];
-        if(s[i]==p[j] || p[j]=='?')return dp[i][j]=solve(s,p,i-1,j-1,dp);
-        if(p[j]=='*')return dp[i][j]=solve(s,p,i-1,j,dp)+solve(s,p,i,j-1,dp);
-        
-        return dp[i][j]=false;
+        if(ind1 >= 0 and ind2 < 0) return false;
+        if(dp[ind1][ind2] != -1) return dp[ind1][ind2];
+        if(s1[ind1] == s2[ind2] or s2[ind2] == '?'){
+            return dp[ind1][ind2] = solve(ind1 - 1, ind2 - 1, s1, s2, dp);
+        }
+        if(s2[ind2] == '*') return dp[ind1][ind2] = (solve(ind1 - 1, ind2, s1, s2,dp) or solve(ind1, ind2 - 1, s1, s2,dp));
+        return dp[ind1][ind2] = false;
     }
     bool isMatch(string s, string p) {
-        int n=s.size();
-        int m=p.size();
-        vector<vector<int>>dp(n,vector<int>(m,-1));
-        return solve(s,p,n-1,m-1,dp);
+        int n1 = s.size();
+        int n2 = p.size();
+        vector <vector <int>> dp(n1, vector<int>(n2 + 1, -1));
+        return solve(n1 - 1, n2 - 1,s ,p, dp);
     }
 };
