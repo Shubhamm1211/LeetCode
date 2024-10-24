@@ -1,20 +1,23 @@
 class Solution {
 public:
-    int solve(int ind,int buy,vector<int>&p,int n,vector<vector<int>>&dp){
-        if(ind==n)return 0;
-        if(dp[ind][buy]!=-1)return dp[ind][buy];
-        int profit=0;
+    int solve(vector <int> &p, int ind, int buy, vector<vector<int>> &dp){
+        int n = p.size();
+        int pro = 0;
+        if(ind == n){
+            return pro;
+        }
+        if(dp[ind][buy] != -1) return dp[ind][buy];
         if(buy){
-            profit=max(-p[ind]+solve(ind+1,0,p,n,dp),solve(ind+1,1,p,n,dp));
+            pro = max(-p[ind] + solve(p,ind + 1,0,dp), solve(p,ind + 1, 1,dp));
         }
         else{
-            profit=max(p[ind]+solve(ind+1,1,p,n,dp),solve(ind+1,0,p,n,dp));
+            pro = max(p[ind] + solve(p,ind + 1,1,dp), solve(p,ind + 1, 0,dp));
         }
-        return dp[ind][buy]=profit;
+        return dp[ind][buy] = pro;
     }
     int maxProfit(vector<int>& p) {
-        int n=p.size();
-        vector<vector<int>>dp(n,vector<int>(2,-1));
-        return solve(0,1,p,n,dp);
+        int n = p.size();
+        vector<vector<int>>dp(n + 1,vector<int>(2, -1));
+        return solve(p,0,1,dp);
     }
 };
