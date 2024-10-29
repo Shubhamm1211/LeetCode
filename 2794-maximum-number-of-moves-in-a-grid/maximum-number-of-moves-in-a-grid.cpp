@@ -6,9 +6,9 @@ public:
         if(row >= n or row < 0 or col >= m or col < 0) return 0;
         if(grid[row][col] <= curr) return 0;
         if(dp[row][col] != -1) return dp[row][col];
-        int op1 =  solve(row - 1, col + 1, grid, grid[row][col],dp);
-        int op2 =  solve(row, col + 1, grid, grid[row][col],dp);
-        int op3 =  solve(row + 1, col + 1, grid, grid[row][col],dp);
+        int op1 = solve(row - 1, col + 1, grid, grid[row][col],dp);
+        int op2 = solve(row, col + 1, grid, grid[row][col],dp);
+        int op3 = solve(row + 1, col + 1, grid, grid[row][col],dp);
         return dp[row][col] = 1 + max({op1, op2, op3});
     }
     int maxMoves(vector<vector<int>>& grid) {
