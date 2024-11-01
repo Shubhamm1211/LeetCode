@@ -1,21 +1,22 @@
-#include <string>
-
 class Solution {
 public:
     string makeFancyString(string s) {
-        string result;
-        int n = s.size();
-        for (int i = 0; i < n; ++i) {
-            char c = s[i];
-            int cnt = 0;
-            int j = i;
-            while (j < n && s[j] == c) {
-                ++cnt;
-                ++j;
+        char prev = s[0];
+        int freq = 1;
+        string ans = "";
+        ans.push_back(s[0]);
+
+        for (int i = 1; i < s.size(); i++) {
+            if (s[i] == prev){
+                freq++;
+            } 
+            else{
+                prev = s[i];
+                freq = 1;
             }
-            result += string(min(2, cnt), c); 
-            i = j - 1; 
+            if (freq < 3) ans.push_back(s[i]);
         }
-        return result;
+
+        return ans;
     }
 };
