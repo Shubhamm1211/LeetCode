@@ -15,7 +15,6 @@ public:
         else{
             reverse(begin(code), end(code));
             k = k * -1;
-            cout << "k = " << k <<endl;
             for(int i = 0; i < n; i++){
                 int sum = 0;
                 for(int j = i + 1; j <= i + k; j++){
