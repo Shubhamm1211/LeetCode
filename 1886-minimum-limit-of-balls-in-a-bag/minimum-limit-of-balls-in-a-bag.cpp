@@ -19,11 +19,10 @@ bool solve(int ball, vector<int>& nums, int maxi) {
         while (left < right) {
             int middle = (left + right) / 2;
             if (solve(middle, nums, maxi)) {
-                right = middle; 
-                                 
-            } else {
-                left = middle + 1;  
-                                    
+                right = middle;           
+            } 
+            else {
+                left = middle + 1;             
             }
         }
         return left;
