@@ -19,7 +19,6 @@ public:
         }
         cout<<endl;
         size_t ans=0;
-        
         for(auto x:mp){
             if(x.second>=3){
                 ans=max(ans,x.first.size());
