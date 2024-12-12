@@ -11,7 +11,6 @@ public:
         }
         ll sum = 0;
         while(!pq.empty()){
-            cout << pq.top() << endl;
             sum += pq.top();
             pq.pop();
         }
