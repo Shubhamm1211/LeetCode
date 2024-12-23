@@ -1,21 +1,21 @@
 class Solution {
 public:
-    int check(int day,vector<int>&p){
-        int sum=0;
-        for(int i=0;i<p.size();i++){
-            sum=sum+ceil((double)p[i]/(double)day) ;
+    int check(vector <int> v, int k){
+        int sum = 0;
+        for(int i = 0; i < v.size(); i++){
+            sum += ceil(v[i] / (k * 1.0));
         }
         return sum;
     }
-    int minEatingSpeed(vector<int>& p, int h) {
-        int maxi=*max_element(p.begin(),p.end());
-        int n=p.size(),mini=-1;
-        int low=1,high=maxi;
-        while(low<high){
-            int mid=low+((high-low)/2);
-            int c=check(mid,p);
-            if(c>h) low=mid+1;
-            else high=mid;
+    int minEatingSpeed(vector<int>& piles, int h) {
+        int n = piles.size();
+        int low = 1, high = *max_element(begin(piles), end(piles));
+        while(low < high){
+            int mid = low + (high - low) / 2;
+            if(check(piles,mid) <= h){
+                high = mid ;
+            }
+            else low = mid + 1;
         }
         return low;
     }
