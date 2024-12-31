@@ -1,20 +1,19 @@
 class Solution {
 public:
-    int trap(vector<int>&h) {
-        int n=h.size();
-        vector<int>r(n);
-        vector<int>l(n);
-        r[0]=h[0];
-        for(int i=1;i<n;i++){
-            r[i]=max(r[i-1],h[i]);
+    int trap(vector<int> &h) {
+        int n = h.size();
+        vector <int> maxr(n), maxl(n);
+        maxr[n - 1] = h[n - 1];
+        for(int i = n - 2; i >= 0; i--){
+            maxr[i] = max(maxr[i + 1], h[i]);
         }
-        l[n-1]=h[n-1];
-        for(int j=n-2;j>=0;j--){
-            l[j]=max(l[j+1],h[j]);
+        maxl[0] = h[0];
+        for(int i = 1; i < n; i++){
+            maxl[i] = max(maxl[i - 1], h[i]);
         }
-        int ans=0;
-        for(int i=0;i<n;i++){
-            ans=ans+(min(l[i],r[i])-h[i]);
+        int ans = 0;
+        for(int i = 0; i < n; i++){
+            ans += min(maxr[i],maxl[i]) - h[i];
         }
         return ans;
     }
