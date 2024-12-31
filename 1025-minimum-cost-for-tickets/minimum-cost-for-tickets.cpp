@@ -1,50 +1,27 @@
 class Solution {
 public:
-    // bool find(int n,vector<int>&days){
-    //     for(auto x:days){
-    //         if(n==x)return true;
-    //     }
-    //     return false;
-    // }
-
-
-    // Memoization below
-    int helper(const vector<int>& days, const vector<int>& costs, const unordered_set<int>& st, int day, vector<int>& memo, int maxd) {
-        if (day > maxd) {
+    int solve(int n1, vector <int> & days, vector <int>& costs, int ind, vector <int>&dp) {
+        if (ind >= n1) {
             return 0;
         }
-        if (memo[day] != -1) {
-            return memo[day];
+        if (dp[ind] != -1) {
+            return dp[ind];
         }
+        int op1 = costs[0] + solve(n1, days, costs, ind + 1, dp);
+        int i;
+        for (i = ind; i < n1 && days[i] < days[ind] + 7; i++);
+        int op2 = costs[1] + solve(n1, days, costs, i, dp);
 
-        if (st.find(day) == st.end()) {
-            memo[day] = helper(days, costs, st, day + 1, memo, maxd);
-        } else {
-            int cost1 = costs[0] + helper(days, costs, st, day + 1, memo, maxd);
-            int cost7 = costs[1] + helper(days, costs, st, day + 7, memo, maxd);
-            int cost30 = costs[2] + helper(days, costs, st, day + 30, memo, maxd);
-            memo[day] = min({cost1, cost7, cost30});
-        }
+        for (i = ind; i < n1 && days[i] < days[ind] + 30; i++);
+        int op3 = costs[2] + solve(n1, days, costs, i, dp);
 
-        return memo[day];
+        dp[ind] = min(op1, min(op2, op3));
+        return dp[ind];
     }
     int mincostTickets(vector<int>& days, vector<int>& costs) {
-        int maxd=days[days.size()-1];
-        int n=days.size();
-        unordered_set<int>st(days.begin(), days.end());
-        vector<int>dp(maxd+1,0);
-        for(int i=1;i<=maxd;i++){
-            if(st.find(i)==st.end()){
-                dp[i]=dp[i-1];
-            }
-            else{
-                int a=costs[0]+dp[i-1];
-                int b=costs[1],c=costs[2];
-                if(i-7>=0)b=b+dp[i-7];
-                if(i-30>=0)c=c+dp[i-30];
-                dp[i]=min(a,min(b,c));
-            }
-        }
-        return dp[maxd];
+    
+        int n = days.size();
+        vector<int> dp(n + 1, -1);
+        return solve(n, days, costs, 0, dp);
     }
 };
