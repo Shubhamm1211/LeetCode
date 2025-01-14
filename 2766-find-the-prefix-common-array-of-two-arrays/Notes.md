@@ -1,1 +1,1 @@
-<h2>find-the-prefix-common-array-of-two-arrays Notes</h2><hr>[ Time taken: 11 m 33 s ]
+<h2>find-the-prefix-common-array-of-two-arrays Notes</h2><hr>[ Time taken: 14 m 0 s ]
