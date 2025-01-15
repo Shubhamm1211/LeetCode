@@ -10,10 +10,10 @@ public:
         if (n1 < n2) {
             int x = num1; 
             int rem = n2 - n1; 
-            for (int i = 0; rem > 0 && i < 32; ++i) {
-                if ((x & (1 << i)) == 0) {
-                    x |= (1 << i); 
-                    rem--;      
+            for(int i = 0; rem > 0 and i < 32; i++){
+                if((x & (1 << i)) == 0){
+                    x |= (1 << i);
+                    rem--;
                 }
             }
             return x;
