@@ -6,11 +6,9 @@ public:
             int mid = i + (j - i) / 2;
             if (temp[mid].first == tar) {
                 return temp[mid].second;
-            } 
-            else if (temp[mid].first < tar) {
+            } else if (temp[mid].first < tar) {
                 i = mid + 1;
-            } 
-            else {
+            } else {
                 j = mid - 1;
             }
         }
@@ -18,6 +16,7 @@ public:
     }
 
     int firstCompleteIndex(vector<int>& arr, vector<vector<int>>& mat) {
+        map<int, pair<int, int>> mp;
         int n = arr.size();
         int nn = mat.size();
         int mm = mat[0].size();
@@ -26,21 +25,24 @@ public:
         for (int i = 0; i < n; i++) {
             temp.push_back({arr[i], i});
         }
-        sort(temp.begin(), temp.end());
-        unordered_map<int, pair<int, int>> mp;
+        sort(begin(temp), end(temp));
+
         for (int i = 0; i < nn; i++) {
             for (int j = 0; j < mm; j++) {
-                mp[mat[i][j]] = {i, j};
+                int ind = bs(temp, mat[i][j]);
+                if (ind != -1) {
+                    mp[mat[i][j]] = {i, j};
+                }
             }
         }
         vector<int> r(nn, 0), c(mm, 0);
         for (int i = 0; i < n; i++) {
             int val = arr[i];
-            int row = mp[val].first;
-            int col = mp[val].second;
-            r[row]++;
-            c[col]++;
-            if (r[row] == mm or c[col] == nn) {
+            int mr = mp[val].first;
+            int mc = mp[val].second;
+            r[mr]++;
+            c[mc]++;
+            if (r[mr] == mm or c[mc] == nn) {
                 return i;
             }
         }
