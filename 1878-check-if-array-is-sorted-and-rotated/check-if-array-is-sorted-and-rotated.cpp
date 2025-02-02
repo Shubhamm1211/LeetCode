@@ -14,13 +14,9 @@ public:
                 break;
             }
         }
-        if(ind == -1){
+        if(ind == -1 or cnt <= 1 and nums[0] >= nums.back()){
             return true;
         }
-        if(cnt > 1){
-            return false;
-        }
-        if(cnt <= 1 and nums[0] >= nums.back()) return true;
         return false;
     }
 };
