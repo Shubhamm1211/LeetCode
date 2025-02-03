@@ -26,11 +26,8 @@ public:
         }
         bool f = true;
         for(auto &x : v){
-            cout << x << " ";
             if(x != 0) f = false;
         }
-        cout << endl;
-        cout << maxi << endl;
         if(f) return 1;
         return maxi + 1;
     }
