@@ -1,7 +1,6 @@
 class Solution {
 public:
     vector<int> queryResults(int l, vector<vector<int>>& q) {
-        // vector <int> vis(l + 1,0);
         vector <int> ans;
         unordered_map <int,int> mp;
         unordered_map <int,int> freq;
@@ -14,7 +13,6 @@ public:
                 freq[c]++;
             }
             else{
-                // vis[ball] = 1;
                 freq[c]++;
             }
             mp[ball] = c;
