@@ -1,19 +1,21 @@
+#define ll long long
 class Solution {
 public:
     long long countBadPairs(vector<int>& nums) {
-        long long int res=0 ; 
-       long long  int n=nums.size();
-        unordered_map<int,int>m ; 
-        long long int total=(n*(n-1))/2;
-        for(int i=0;i<n;i++){
-            nums[i]=nums[i]-i; 
-            res=res+m[nums[i]];
-            m[nums[i]]++;
+        ll n = nums.size();
+        vector <ll> temp;
+        unordered_map<ll,ll> mp;
+        for(ll i = 0; i < n; i++){
+            temp.push_back(nums[i] - i);
+            mp[temp[i]]++;
         }
-        long long int ans=total-res;
-        return ans;
-        
-        
-        
+        ll ans = (n * (n - 1)) / 2;
+        ll sub = 0;
+        for(auto x : mp){
+            if(x.second > 1){
+                sub += (x.second * (x.second - 1)) / 2;
+            }
+        }
+        return ans - sub;
     }
 };
