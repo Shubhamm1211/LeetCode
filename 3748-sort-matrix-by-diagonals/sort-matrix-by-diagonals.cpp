@@ -16,8 +16,6 @@ public:
             r = start;
             c = 0;
             int i = 0;
-            for(auto &x : temp) cout << x << " ";
-            cout << endl;
             while(r < n and c < n){
                 grid[r][c] = temp[i];
                 i++;
@@ -40,8 +38,6 @@ public:
             r = 0;
             c = start;
             int i = 0;
-            for(auto &x : temp) cout << x << " ";
-            cout << endl;
             while(r < n and c < n){
                 grid[r][c] = temp[i];
                 i++;
