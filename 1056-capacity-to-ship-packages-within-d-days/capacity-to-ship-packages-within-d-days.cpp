@@ -1,29 +1,28 @@
 class Solution {
 public:
-    int solve(vector<int>&w,int cap){
-        int day=1,load=0,n=w.size();
-        for(int i=0;i<n;i++){
-            if(w[i]+load>cap){
-                day++;
-                load=w[i];
-            }
-            else{
-                load=load+w[i];
+    int solve(vector <int> &arr, int k, int mid){
+        int sum = arr[0], cnt = 1;
+        for(int i = 1; i < arr.size(); i++){
+            sum += arr[i];
+            if(sum > mid){
+                cnt++;
+                sum = arr[i];
             }
         }
-        return day;
+        return cnt <= k;
     }
-    int shipWithinDays(vector<int>& w, int days) {
-        int low=*max_element(w.begin(),w.end());
-        int high=accumulate(w.begin(),w.end(),0);
-        while(low<=high){
-            int mid=low+(high-low)/2;
-            int cap=solve(w,mid);
-            if(cap<=days){
-                high=mid-1;
+    int shipWithinDays(vector<int>& arr, int k) {
+        int low = *max_element(begin(arr), end(arr));
+        int high = accumulate(begin(arr), end(arr), 0);
+        int ans = -1;
+        while(low <= high){
+            int mid = high - ((high - low) / 2);
+            if(solve(arr,k,mid)){
+                high = mid - 1;
+                ans = mid;
             }
-            else low=mid+1;
+            else low = mid + 1;
         }
-        return low;
+        return ans;
     }
 };
