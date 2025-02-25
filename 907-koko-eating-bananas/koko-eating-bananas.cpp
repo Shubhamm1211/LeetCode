@@ -1,22 +1,25 @@
 class Solution {
 public:
-    int check(vector <int> v, int k){
-        int sum = 0;
-        for(int i = 0; i < v.size(); i++){
-            sum += ceil(v[i] / (k * 1.0));
+    int solve(vector <int> &arr, int h, int mid){
+        int ans = 0;
+        for(int i = 0; i < arr.size(); i++){
+            ans += ceil(1.0 * arr[i] / mid);
         }
-        return sum;
+        return ans <= h;
     }
-    int minEatingSpeed(vector<int>& piles, int h) {
-        int n = piles.size();
-        int low = 1, high = *max_element(begin(piles), end(piles));
-        while(low < high){
-            int mid = low + (high - low) / 2;
-            if(check(piles,mid) <= h){
-                high = mid ;
+    int minEatingSpeed(vector<int>& arr, int h) {
+        int n = arr.size();
+        int low = 1;
+        int high = *max_element(begin(arr), end(arr));
+        int ans = -1;
+        while(low <= high){
+            int mid = high - ((high - low) / 2);
+            if(solve(arr,h,mid)){
+                high = mid - 1;
+                ans = mid;
             }
             else low = mid + 1;
         }
-        return low;
+        return ans;
     }
 };
