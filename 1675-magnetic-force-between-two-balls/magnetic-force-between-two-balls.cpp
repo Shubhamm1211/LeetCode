@@ -1,30 +1,31 @@
+#define ll long long
 class Solution {
 public:
-    bool solve(int dis,vector<int>&pos,int m){
-        int cnt=1,lp=pos[0];
-        for(int i=1;i<pos.size();i++){
-            if(pos[i]-lp>=dis){
+    ll n;
+    bool solve(vector <int> &arr, int k, int mid){
+        int cnt = 1;
+        int curr = arr[0];
+        for(ll i = 1; i < n; i++){
+            if(arr[i] - curr >= mid){
                 cnt++;
-                lp=pos[i];
+                curr = arr[i];
             }
-            if(cnt>=m)return true;
         }
-        return false;
+        return cnt >= k;
     }
-    int maxDistance(vector<int>& pos, int m) {
-        sort(pos.begin(),pos.end());
-        int l=1;
-        int h=(pos.back()-pos[0])/(m-1);
-        int ans=1;
-        while(l<=h){
-            int mid=l+((h-l)/2);
-            if(solve(mid,pos,m)){
-                ans=mid;
-                l=mid+1;
+    int maxDistance(vector<int>& arr, int m) {
+        n = arr.size();
+        ll low = 1;
+        ll high = *max_element(begin(arr), end(arr));
+        ll ans = -1;
+        sort(begin(arr), end(arr));
+        while(low <= high){
+            ll mid = high - ((high - low) / 2);
+            if(solve(arr,m,mid)){
+                ans = mid;
+                low = mid + 1;
             }
-            else{
-                h=mid-1;
-            }
+            else high = mid - 1;
         }
         return ans;
     }
