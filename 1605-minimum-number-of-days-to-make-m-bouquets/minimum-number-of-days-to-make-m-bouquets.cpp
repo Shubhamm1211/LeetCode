@@ -1,35 +1,36 @@
+#define ll long long
 class Solution {
 public:
-    bool solve(vector<int>&v,int m,int k,long long int day){
-        int ans=0,cnt=0;
-        for(int i=0;i<v.size();i++){
-            if(v[i]<=day){
+    ll solve(vector <int> &arr, int m, int k, int mid){
+        ll n = arr.size();
+        ll cnt = 0, ans = 0;
+        for(ll i = 0; i < n; i++){
+            if(arr[i] <=  mid){
                 cnt++;
             }
-            else{
-                ans=ans+cnt/k ;
-                cnt=0;
+            else cnt = 0;
+            if(cnt == k){
+                ans++;
+                cnt = 0;
             }
         }
-        ans=ans+cnt/k;
-        if(ans>=m)return true;
-        return false;
+        return ans >= m;
     }
-    int minDays(vector<int>& v, int m, int k) {
-        if((long long)m*k>v.size())return -1;
-        int low=*min_element(v.begin(),v.end());
-        int high=*max_element(v.begin(),v.end());
-        while(low<=high){
-            long long int mid=low+(high-low)/2;
-            if(solve(v,m,k,mid)){
-                high=mid-1;
+    int minDays(vector<int>& arr, int m, int k) {
+        ll n = arr.size();
+        ll tot = (ll)m * k;
+        if(n < tot) return -1;
+        ll low = 1;
+        ll high = *max_element(begin(arr), end(arr));
+        ll ans = -1;
+        while(low <= high){
+            ll mid = high - ((high - low) / 2);
+            if(solve(arr,m,k,mid)){
+                high = mid - 1;
+                ans = mid;
             }
-            else{
-            low=mid+1;
-            }
+            else low = mid + 1;
         }
-        return low;
+        return ans;
     }
 };
-// //tc->O(n*log(max_day))
-// //sc->O(1)
