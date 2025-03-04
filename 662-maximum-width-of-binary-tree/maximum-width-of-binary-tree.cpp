@@ -9,7 +9,7 @@
  *     TreeNode(ll x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-#define ll long long
+#define ll unsigned long long
 class Solution {
 public:
     int widthOfBinaryTree(TreeNode* root) {
@@ -24,7 +24,7 @@ public:
             for(ll i = 0; i < n; i++){
                 TreeNode *node = q.front().first;
                 ll ind = q.front().second;
-                ind -= startind;
+                // ind -= startind;
                 q.pop();
                 if(node -> left){
                     q.push({node -> left, 2LL * ind + 1LL});
