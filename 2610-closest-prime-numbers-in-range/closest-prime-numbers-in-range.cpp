@@ -7,7 +7,7 @@ public:
         isprime[1] = false;
         for(int i = 2; i*i <= 1e6; i++){
             if(isprime[i]){
-                for(int j = i * i; j <= 1e6; j += i){
+                for(int j = i + i; j <= 1e6; j += i){
                     isprime[j] = false;
                 }
             }
