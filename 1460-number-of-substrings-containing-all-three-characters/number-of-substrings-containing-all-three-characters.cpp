@@ -1,14 +1,19 @@
 class Solution {
 public:
     int numberOfSubstrings(string s) {
-        int n=s.size(),ans=0;
-        int ls[3]={-1,-1,-1};
-        for(int i=0;i<n;i++){
-            ls[s[i]-'a']=i;
-            if(ls[0]!=-1 and ls[1]!=-1 and ls[2]!=-1){
-                ans=ans+1+min(ls[0],min(ls[1],ls[2]));
+        int n = s.size();
+        map <char,int> mp;
+        int i = 0, j = 0;
+        int ans = 0;
+        while(i <= j and j < n){
+            mp[s[j]]++;
+            while(mp.size() == 3){
+                ans += n - j;
+                mp[s[i]]--;
+                if(mp[s[i]] == 0) mp.erase(s[i]);
+                i++;
             }
-            
+            j++;
         }
         return ans;
     }
