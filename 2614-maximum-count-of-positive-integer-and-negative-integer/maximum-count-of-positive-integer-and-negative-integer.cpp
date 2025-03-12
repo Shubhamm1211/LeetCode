@@ -21,7 +21,6 @@ public:
             int neg = lb;
             return max(pos,neg);
         }
-        cout << lb << " " << ub << endl;
         return -1;
     }
 };
