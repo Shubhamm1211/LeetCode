@@ -1,11 +1,27 @@
 class Solution {
 public:
     int maximumCount(vector<int>& nums) {
-        int cp=0,cn=0;
-        for(auto it:nums){
-            if(it>0)cp++;
-            else if(it<0)cn++;
+        int n = nums.size();
+        int lb = lower_bound(begin(nums), end(nums), 0) - nums.begin();
+        int ub = upper_bound(begin(nums), end(nums), 0) - nums.begin();
+        if(lb == ub){
+            int pos,neg;
+            if(lb >= 0 and lb < n and nums[lb] != 0){
+                pos = n - lb;
+                neg = lb;
+            }
+            else{
+                pos = n - lb - 1;
+                neg = n - pos - 1;
+            }
+            return max(pos,neg);
         }
-        return max(cp,cn);
+        else{
+            int pos = n - ub;
+            int neg = lb;
+            return max(pos,neg);
+        }
+        cout << lb << " " << ub << endl;
+        return -1;
     }
 };
