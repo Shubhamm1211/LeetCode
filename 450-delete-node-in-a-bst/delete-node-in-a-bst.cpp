@@ -15,11 +15,10 @@ public:
         else {  
             if (!root->left) return root->right;
             if (!root->right) return root->left;
-            TreeNode* next = findMin(root->right);
-            root->val = next->val;
-            root->right = deleteNode(root->right, next->val);
+            TreeNode *next = findMin(root -> right);
+            root -> val = next -> val;
+            root -> right = deleteNode(root -> right, next -> val);
         }
         return root;
     }
-    
 };
