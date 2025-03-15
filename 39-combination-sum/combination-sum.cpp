@@ -1,22 +1,23 @@
 class Solution {
 public:
-    void solve(vector <int> &v, vector <vector<int>> &ans,int t, vector<int> &ds, int ind){
-        if(t == 0){
-            ans.push_back(ds);
+    vector <int> temp;
+    void solve(int ind, vector <int> &nums, vector <vector <int>> &ans, int tar){
+        if(tar == 0){
+            ans.push_back(temp);
             return;
         }
-        if(t < 0) return;
-        for(int j = ind; j < v.size(); j++){
-            ds.push_back(v[j]);
-            solve(v,ans,t - v[j], ds, j);
-            ds.pop_back();
-        }
-        
+        if(ind == nums.size() or tar < 0) return;
+        temp.push_back(nums[ind]);
+        solve(ind, nums, ans, tar - nums[ind]);
+        temp.pop_back();
+
+        solve(ind + 1, nums, ans, tar);
+
     }
-    vector<vector<int>> combinationSum(vector<int>& v, int t) {
-        vector <vector<int>> ans;
-        vector <int> ds;
-        solve(v,ans,t,ds,0);
+    vector<vector<int>> combinationSum(vector<int>& nums, int tar) {
+        int n = nums.size();
+        vector <vector <int>> ans;
+        solve(0,nums,ans,tar);
         return ans;
     }
 };
