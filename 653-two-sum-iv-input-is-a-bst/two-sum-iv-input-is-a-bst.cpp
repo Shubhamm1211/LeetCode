@@ -15,8 +15,10 @@ public:
             curr = curr->right;
         }
 
-        TreeNode *l = leftst.top(); leftst.pop();
-        TreeNode *r = rightst.top(); rightst.pop();
+        TreeNode *l = leftst.top(); 
+        leftst.pop();
+        TreeNode *r = rightst.top(); 
+        rightst.pop();
         while (l != r) { 
             int sum = l->val + r->val;
             if (sum == k) return true;
