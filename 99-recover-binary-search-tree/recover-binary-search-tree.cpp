@@ -33,10 +33,10 @@ public:
         if(!root) return;
         prev = NULL, first = NULL, middle = NULL, last = NULL;
         inorder(root);
-        if(!last and first and middle){
+        if(!last){
             swap(first -> val ,middle -> val);
         }
-        else if(first and last){
+        else {
             swap(first -> val, last -> val);
         }
     }
